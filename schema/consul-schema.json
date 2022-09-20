@@ -1,12 +1,16 @@
 {
     "type": "object",
     "title": "Consul Agent Configuration",
-    "required": ["node_name", "data_dir", "log_level"],
+    "required": ["datacenter", "data_dir", "log_level", "client_addr"],
 
     "definitions": {
         "ip": {
             "type": "string",
             "title": "IP Address (ex: 0.0.0.0)"
+        },
+        "port": {
+            "type": "string",
+            "title": "Port (ex 1-65536)"
         },
         "directory": {
             "type": "string",
@@ -65,6 +69,21 @@
                 "Local Filesystem Directory Used by Consul to Persist Data"
             ]
         },
+        "log_level": {
+            "$ref": "#/definitions/log_level"
+        },
+        "auto_reload_config": {
+            "type": "boolean",
+            "info": [ "Auto-reload configuration files from disk when changes are detected?" ],
+            "deleteOnEmpty": true
+        },
+        "license_path": {
+            "$ref": "#/definitions/directory",
+            "title": "Licence Path",
+            "info": [
+                "Local Filesystem Path to Enterprise License File"
+            ]
+        },
         "advertise_addr": {
             "type": "string",
             "title": "Advertise Address",
@@ -76,9 +95,6 @@
             "type": "string",
             "title": "Client Address",
             "info": ["Client address or something"]
-        },
-        "log_level": {
-            "$ref": "#/definitions/log_level"
         },
         "ui": {
             "type": "boolean",
@@ -92,35 +108,148 @@
         },
         "addresses": {
             "type": "object",
-            "widget": "Accordions",
+            "widget": "Card",
+            "title": "Listen Addresses",
+            "view": {
+                "variant": "outlined"
+            },
             "properties": {
                 "http": {
-                    "title": "Configure HTTP Listen Address(es)?",
+                    "title": "Configure HTTP Listen Address(es)",
                     "$ref": "#/definitions/ip"
                 },
                 "https": {
-                    "title": "Configure HTTPS Listen Address(es)?",
+                    "title": "Configure HTTPS Listen Address(es)",
                     "$ref": "#/definitions/ip"
                 },
                 "dns": {
-                    "title": "Configure DNS Listen Address(es)?",
+                    "title": "Configure DNS Listen Address(es)",
                     "$ref": "#/definitions/ip"
                 },
                 "grpc": {
-                    "title": "Configure GRPC Listen Address(es)?",
+                    "title": "Configure GRPC Listen Address(es)",
                     "$ref": "#/definitions/ip"
+                }
+            }
+        },
+        "ports": {
+            "type": "object",
+            "widget": "Card",
+            "title": "Listen Ports",
+            "view": {
+                "variant": "outlined"
+            },
+            "properties": {
+                "http": {
+                    "title": "Configure HTTP Listen Port",
+                    "$ref": "#/definitions/port"
+                },
+                "https": {
+                    "title": "Configure HTTPS Listen Port",
+                    "$ref": "#/definitions/port"
+                },
+                "dns": {
+                    "title": "Configure DNS Listen Port",
+                    "$ref": "#/definitions/port"
+                },
+                "grpc": {
+                    "title": "Configure GRPC Listen Port",
+                    "$ref": "#/definitions/port"
+                },
+                "serf_lan": {
+                    "title": "Configure SERF LAN Listen Port",
+                    "$ref": "#/definitions/port"
+                },
+                "serf_wan": {
+                    "title": "Configure SERF WAN Listen Port",
+                    "$ref": "#/definitions/port"
                 }
             }
         },
         "verify_incoming": {
             "type": "boolean"
-          },
-          "verify_outgoing": {
+        },
+        "verify_outgoing": {
             "type": "boolean"
-          },
-          "verify_server_hostname": {
+        },
+        "verify_server_hostname": {
             "type": "boolean"
-          }
+        },
+        "disable_keyring_file": {
+            "type": "boolean",
+            "info": [ "If set, the keyring will not be persisted to a file. Any installed keys will be lost on shutdown, and only the given -encrypt key will be available on startup. This defaults to false." ]
+        },
+        "alt_domain": {
+            "type": "string",
+            "info": [ "Allows Consul to respond to DNS queries in an alternate domain, in addition to the primary domain." ]
+        },
+        "auto_pilot": {
+            "type": "object",
+            "info": [ "Auto pilot configures various settings within consul. Most of these should never be changed unless done with advanced Consul tuning knowledge.",
+                      "After bootstrapping consul, Auto pilot values can only be changed via 'consul operator autopilot' commands."],
+            "properties": {
+                "cleanup_dead_servers": {
+                    "type": "boolean",
+                    "info": [ "This controls the automatic removal of dead server nodes periodically and whenever a new server is added to the cluster." ]
+                },
+                "last_contact_threshold": {
+                    "type": "string",
+                    "info": [ "Controls the maximum amount of time a server can go without contact from the leader before being considered unhealthy. Must be a duration value such as 10s." ]
+                },
+                "max_trailing_logs": {
+                    "type": "string",
+                    "info": [ "Controls the maximum number of log entries that a server can trail the leader by before being considered unhealthy." ]
+                },
+                "min_quorum": {
+                    "type": "string",
+                    "info": [ "Sets the minimum number of servers necessary in a cluster. Autopilot will stop pruning dead servers when this minimum is reached." ]
+                },
+                "server_stabilization_time": {
+                    "type": "string",
+                    "info": [ "Controls the minimum amount of time a server must be stable in the 'healthy' state before being added to the cluster. Only takes effect if all servers are running Raft protocol version 3 or higher. Must be a duration value such as 30s." ]
+                },
+                "redundancy_zone_tag": {
+                    "type": "string",
+                    "info": [ "This controls the node_meta key to use when Autopilot is separating servers into zones for redundancy. Only one server in each zone can be a voting member at one time. If left blank (the default), this feature will be disabled." ]
+                },
+                "disable_upgrade_migration": {
+                    "type": "string",
+                    "info": [ "If set to true, this setting will disable Autopilot's upgrade migration strategy in Consul Enterprise of waiting until enough newer-versioned servers have been added to the cluster before promoting any of them to voters. " ]
+                },
+                "upgrade_version_tag": {
+                    "type": "string",
+                    "info": [ "The node_meta tag to use for version info when performing upgrade migrations. If this is not set, the Consul version will be used." ]
+                }
+            }
+        },
+        "cache": {
+            "type": "object",
+            "widget": "Card",
+            "title": "Cache Options (Client Only)",
+            "view": {
+                "variant": "outlined"
+            },
+            "properties": {
+                "entry_fetch_max_burst": {
+                    "type": "string"
+                },
+                "entry_fetch_rate": {
+                    "type": "string"
+                },
+                "update_interval": {
+                    "type": "string"
+                }
+            }
+        },
+        "disable_update_check": {
+            "type": "boolean"
+        },
+        "disable_anonymous_signature": {
+            "type": "boolean"
+        },
+        "leave_on_terminate": {
+            "type": "boolean"
+        }
     },
     "dependencies": {
         "server": {
