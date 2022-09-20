@@ -4,6 +4,7 @@
     "homepage": "http://hashiconfig.alluvium.cloud",
     "private": true,
     "dependencies": {
+        "@apidevtools/json-schema-ref-parser": "^9.0.9",
         "@emotion/react": "^11.9.0",
         "@emotion/styled": "^11.8.1",
         "@mui/icons-material": "^5.10.3",
