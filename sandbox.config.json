@@ -1,5 +1,0 @@
-{
-    "template": "create-react-app",
-    "startScript": "start",
-    "node": "14"
-}
