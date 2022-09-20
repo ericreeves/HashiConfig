@@ -7,6 +7,7 @@ import { Table } from '@ui-schema/ds-material/Widgets/Table'
 import { TableAdvanced } from '@ui-schema/ds-material/Widgets/TableAdvanced'
 import { SelectChips } from '@ui-schema/ds-material/Widgets/SelectChips'
 import { WidgetCountrySelect } from './Widgets/WidgetCountrySelect'
+import { InfoRenderer } from '@ui-schema/ds-material/Component/InfoRenderer'
 
 export type CustomWidgetsBinding = WidgetsBindingFactory<{}, MuiWidgetsBindingTypes<{}>, MuiWidgetsBindingCustom<{}>>
 
@@ -21,9 +22,10 @@ const CustomTable: React.ComponentType<WidgetProps<CustomWidgetsBinding>> = ({wi
         },
         custom: {
             ...widgets.custom,
-            Text: TextRendererCell,
+            Text: TextRendererCell
         },
     }), [widgets])
+
 
     return <Table
         {...props}
