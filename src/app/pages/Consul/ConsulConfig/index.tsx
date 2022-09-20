@@ -5,7 +5,6 @@ import { Lead } from '../components/Lead';
 import { SubTitle } from '../components/SubTitle';
 import { P } from '../components/P';
 import { A } from 'app/components/A';
-import { GithubRepoForm } from './GithubRepoForm';
 import { ThemeSwitch } from './ThemeSwitch';
 import { LanguageSwitch } from './LanguageSwitch';
 import { ReactComponent as StateIcon } from './assets/state.svg';
@@ -21,7 +20,9 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'app/components/Link';
 import { messages } from '../messages';
 
-export function Features() {
+
+
+export function ConsulConfig() {
   const { t } = useTranslation();
 
   return (
@@ -33,24 +34,6 @@ export function Features() {
             <SubTitle>Consul</SubTitle>
             <P>
               Consul configuation wizard.
-            </P>
-          </Content>
-        </Feature>
-        <Feature>
-          <StateIcon className="feature-icon" />
-          <Content>
-            <SubTitle>Nomad</SubTitle>
-            <P>
-              Nomad configuation wizard.
-            </P>
-          </Content>
-        </Feature>
-        <Feature>
-          <StateIcon className="feature-icon" />
-          <Content>
-            <SubTitle>Vault</SubTitle>
-            <P>
-              Vault configuation wizard.
             </P>
           </Content>
         </Feature>

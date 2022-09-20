@@ -6,17 +6,38 @@ import { ReactComponent as GithubIcon } from './assets/github-icon.svg';
 export function Nav() {
   return (
     <Wrapper>
-      <Item
-        href="https://cansahin.gitbook.io/react-boilerplate-cra-template/"
+      {/* <Item
+        href="https://github.com/ericreeves/hashiconfig"
         target="_blank"
         title="Documentation Page"
         rel="noopener noreferrer"
       >
         <DocumentationIcon />
         Documentation
+      </Item> */}
+      <Item
+        href="/consul"
+        title="Consul"
+        rel="noopener noreferrer"
+      >
+        Consul
       </Item>
       <Item
-        href="https://github.com/react-boilerplate/react-boilerplate-cra-template"
+        href="/nomad"
+        title="Nomad"
+        rel="noopener noreferrer"
+      >
+        Nomad
+      </Item>
+      <Item
+        href="/vault"
+        title="Vault"
+        rel="noopener noreferrer"
+      >
+        Vault
+      </Item>
+      <Item
+        href="https://github.com/ericreeves/hashiconfig"
         target="_blank"
         title="Github Page"
         rel="noopener noreferrer"

@@ -1,24 +1,22 @@
 import * as React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { NavBar } from 'app/components/NavBar';
-import { Masthead } from './Masthead';
-import { Features } from './Features';
+import { ConsulConfig } from './ConsulConfig';
 import { PageWrapper } from 'app/components/PageWrapper';
 
-export function HomePage() {
+export function Consul() {
   return (
     <>
       <Helmet>
-        <title>Home Page</title>
+        <title>HashiConfig Consul Wizard Page</title>
         <meta
           name="description"
-          content="HashiCorp Configuration File Wizard"
+          content="HashiConfig Consul Config Wizard"
         />
       </Helmet>
       <NavBar />
       <PageWrapper>
-        <Masthead />
-        <Features />
+        <ConsulConfig />
       </PageWrapper>
     </>
   );
