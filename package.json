@@ -1,17 +1,51 @@
 {
-  "private": true,
+  "name": "nuxt3-primevue-starter",
+  "version": "1.2.0",
+  "license": "MIT",
   "scripts": {
-    "build": "nuxt build",
-    "dev": "nuxt dev",
-    "generate": "nuxt generate",
-    "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "build": "nuxi build",
+    "dev": "nuxi dev",
+    "info": "nuxi info",
+    "generate": "nuxi generate",
+    "preview": "nuxi preview",
+    "module": "nuxi init -t module my-module",
+    "start": "node .output/server/index.mjs",
+    "lint": "eslint --fix .",
+    "test:unit": "vitest --run --reporter verbose",
+    "test:ui": "vitest --ui",
+    "test:coverage": "vitest run --coverage",
+    "story:dev": "histoire dev",
+    "story:build": "histoire build",
+    "story:preview": "histoire preview"
+  },
+  "dependencies": {
+
   },
   "devDependencies": {
-    "@formkit/nuxt": "^1.0.0-beta.11-db38c2b",
-    "nuxt": "3.0.0-rc.11",
-    "primeflex": "^3.2.1",
-    "primeicons": "^6.0.1",
-    "primevue": "^3.17.0"
+    "@antfu/eslint-config": "^0.27.0",
+    "@formkit/nuxt": "next",
+    "@histoire/plugin-nuxt": "^0.10.7",
+    "@histoire/plugin-vue": "^0.10.7",
+    "@iconify-json/carbon": "^1.1.8",
+    "@iconify-json/mdi": "^1.1.33",
+    "@iconify-json/prime": "^1.1.4",
+    "@iconify-json/twemoji": "^1.1.5",
+    "@nuxt/content": "^2.1.1",
+    "@nuxt/test-utils": "^3.0.0-rc.11",
+    "@pinia/nuxt": "^0.4.2",
+    "@sfxcode/nuxt-primevue": "^0.8.2",
+    "@unocss/nuxt": "^0.45.22",
+    "@vitejs/plugin-vue": "^3.1.0",
+    "@vitest/ui": "^0.23.4",
+    "@vueuse/nuxt": "^9.2.0",
+    "c8": "^7.12.0",
+    "eslint": "^8.24.0",
+    "histoire": "^0.10.7",
+    "jsdom": "^20.0.0",
+    "nuxt": "^3.0.0-rc.11",
+    "pinia": "^2.0.22",
+    "sass": "^1.55.0",
+    "typescript": "^4.8.3",
+    "vitest": "^0.23.4"
   }
 }
