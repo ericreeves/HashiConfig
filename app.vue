@@ -1,5 +1,5 @@
 <template>
-  <div>
-    <Form />
-  </div>
+  <NuxtLayout>
+    <Consul />
+  </NuxtLayout>
 </template>

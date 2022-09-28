@@ -9,6 +9,9 @@
   },
   "devDependencies": {
     "@formkit/nuxt": "^1.0.0-beta.11-db38c2b",
-    "nuxt": "3.0.0-rc.11"
+    "nuxt": "3.0.0-rc.11",
+    "primeflex": "^3.2.1",
+    "primeicons": "^6.0.1",
+    "primevue": "^3.17.0"
   }
 }
